@@ -1,65 +1,39 @@
-"use client";
+import FurnitureGallery from "@/components/Home/FurnitureGallery";
+import ProductList from "@/components/Home/ProductList";
+import ServiceList from "@/components/Home/ServiceList";
+import { Button, Container } from "@mui/material";
 
-import { Container } from "@mui/material";
-import Cover1 from "/public/images/home/bg-cover-1.png";
-import Cover2 from "/public/images/home/bg-cover-2.png";
-import Cover3 from "/public/images/home/bg-cover-3.png";
-import Cover4 from "/public/images/home/bg-cover-4.png";
-import Image from "next/image";
-
-export default function Home() {
+export default async function Home() {
   return (
-    <Container className="">
-      <div className="grid grid-cols-[452px_332px_332px] grid-rows-[repeat(2,300px)] gap-4 my-20">
-        <div className="[grid-row:1_/_span_2] relative">
-          <Image
-            src={Cover1}
-            alt="cover"
-            className="object-cover absolute -z-10"
-          />
-          <div className="p-6">
-            <h6 className="text-sm font-bold text-[#2DC071]">5 items</h6>
-            <h2 className="text-[2.5rem] font-bold">FURNITURE</h2>
-            <h6 className="text-sm font-bold">Read More</h6>
-          </div>
+    <Container maxWidth="xl">
+      <FurnitureGallery />
+      <Container maxWidth="lg" className="my-20 flex items-center flex-col">
+        <div className="text-center space-y-2">
+          <h4 className="text-[#737373] text-xl">Featured Products</h4>
+          <h3 className="text-2xl font-bold">BESTSELLER PRODUCTS</h3>
+          <p className="text-[#737373] text-sm">
+            Problems trying to resolve the conflict between
+          </p>
         </div>
-        <div className="[grid-column:2_/span_2] relative">
-          <Image
-            src={Cover2}
-            alt="cover"
-            className="object-cover absolute -z-10"
-          />
-          <div className="p-6">
-            <h6 className="text-sm font-bold text-[#2DC071]">5 items</h6>
-            <h3 className="text-2xl font-bold">FURNITURE</h3>
-            <h6 className="text-sm font-bold">Read More</h6>
-          </div>
+        <ProductList />
+        <Button
+          variant="outlined"
+          className="w-60 py-3 text-sm text-[#23A6F0] border-[#23A6F0]"
+          // onClick={() => alert("Load more products")}
+        >
+          LOAD MORE PRODUCTS
+        </Button>
+      </Container>
+      <Container maxWidth="lg" className="my-20 flex items-center flex-col">
+        <div className="text-center space-y-2">
+          <h4 className="text-[#737373] text-xl">Featured Products</h4>
+          <h3 className="text-2xl font-bold">THE BEST SERVICES</h3>
+          <p className="text-[#737373] text-sm">
+            Problems trying to resolve the conflict between
+          </p>
         </div>
-        <div className="relative">
-          <Image
-            src={Cover3}
-            alt="cover"
-            className="object-cover absolute -z-10"
-          />
-          <div className="p-6">
-            <h6 className="text-sm font-bold text-[#2DC071]">5 items</h6>
-            <h3 className="text-2xl font-bold">FURNITURE</h3>
-            <h6 className="text-sm font-bold">Read More</h6>
-          </div>
-        </div>
-        <div className="relative">
-          <Image
-            src={Cover4}
-            alt="cover"
-            className="object-cover absolute -z-10"
-          />
-          <div className="p-6">
-            <h6 className="text-sm font-bold text-[#2DC071]">5 items</h6>
-            <h3 className="text-2xl font-bold">FURNITURE</h3>
-            <h6 className="text-sm font-bold">Read More</h6>
-          </div>
-        </div>
-      </div>
+        <ServiceList />
+      </Container>
     </Container>
   );
 }
