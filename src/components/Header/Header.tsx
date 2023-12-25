@@ -31,7 +31,7 @@ export default function Header() {
             <li>Pages</li>
           </ul>
         </div>
-        <ul className="flex-1 flex gap-6 justify-end items-center text-[#23A6F0] font-thin">
+        <ul className="flex-1 flex gap-6 justify-end items-center text-primary font-thin">
           <li>
             <Link href="/" className="flex items-center gap-2">
               <PersonOutline />

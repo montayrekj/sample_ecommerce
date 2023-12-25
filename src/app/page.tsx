@@ -1,4 +1,5 @@
 import FurnitureGallery from "@/components/Home/FurnitureGallery";
+import PostList from "@/components/Home/PostList";
 import ProductList from "@/components/Home/ProductList";
 import ServiceList from "@/components/Home/ServiceList";
 import { Button, Container } from "@mui/material";
@@ -18,7 +19,7 @@ export default async function Home() {
         <ProductList />
         <Button
           variant="outlined"
-          className="w-60 py-3 text-sm text-[#23A6F0] border-[#23A6F0]"
+          className="w-60 py-3 text-sm text-primary border-primary"
           // onClick={() => alert("Load more products")}
         >
           LOAD MORE PRODUCTS
@@ -33,6 +34,18 @@ export default async function Home() {
           </p>
         </div>
         <ServiceList />
+      </Container>
+      <Container
+        maxWidth="lg"
+        className="my-20 flex items-center flex-col gap-20"
+      >
+        <div className="text-center space-y-2">
+          <h6 className="text-primary text-sm font-bold">Practice Advice</h6>
+          <h2 className="text-[2.5rem] font-bold text-[#252B42]">
+            FEATURED POSTS
+          </h2>
+        </div>
+        <PostList />
       </Container>
     </Container>
   );
