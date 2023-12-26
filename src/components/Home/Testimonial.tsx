@@ -1,6 +1,6 @@
 "use client";
 
-import { TestimonialImages } from "@/lib/testimonial.constants";
+import { TestimonialImages } from "@/lib/constants/testimonial.constants";
 import { Container } from "@mui/material";
 import Image from "next/image";
 import UserImg from "/public/images/user.png";
@@ -8,7 +8,10 @@ import Ratings from "../Ratings";
 
 export default function Testimonial() {
   return (
-    <Container maxWidth="lg" className="my-20 flex justify-evenly ">
+    <Container
+      maxWidth="lg"
+      className="my-20 flex justify-evenly max-lg:flex-col max-lg:gap-y-20 items-center gap-4"
+    >
       <div className="flex flex-col items-center justify-center text-center max-w-md gap-6">
         <h3 className="text-2xl font-bold mb-10">What they say about us</h3>
         <Image src={UserImg} alt="Regina Miles" width={90} height={90} />
@@ -31,7 +34,6 @@ export default function Testimonial() {
             alt={`testimonial-${idx}`}
             width="143"
             height="143"
-            unoptimized
             key={idx}
           />
         ))}

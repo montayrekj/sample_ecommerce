@@ -9,7 +9,7 @@ export default async function ProductList() {
   const productList = products.products;
 
   return (
-    <div className="my-20 grid grid-cols-5 gap-7">
+    <div className="my-20 grid grid-cols-1 md:grid-cols-5 gap-7">
       {productList &&
         productList.map((product: any) => (
           <BestsellerProductItem key={product.id} {...product} />

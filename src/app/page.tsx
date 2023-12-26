@@ -10,11 +10,13 @@ import BannerImage from "/public/images/home/cta-banner-bg.png";
 export default async function Home() {
   return (
     <>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" className="w-auto pb-20">
         <FurnitureGallery />
         <Container maxWidth="lg" className="my-20 flex items-center flex-col">
-          <div className="text-center space-y-2">
-            <h4 className="text-[#737373] text-xl">Featured Products</h4>
+          <div className="text-center space-y-2 max-w-[300px]">
+            <h4 className="text-[#737373] text-xl max-md:hidden">
+              Featured Products
+            </h4>
             <h3 className="text-2xl font-bold">BESTSELLER PRODUCTS</h3>
             <p className="text-[#737373] text-sm">
               Problems trying to resolve the conflict between
@@ -31,7 +33,9 @@ export default async function Home() {
         </Container>
         <Container maxWidth="lg" className="my-20 flex items-center flex-col">
           <div className="text-center space-y-2">
-            <h4 className="text-[#737373] text-xl">Featured Products</h4>
+            <h4 className="text-[#737373] text-xl max-md:hidden">
+              Featured Products
+            </h4>
             <h3 className="text-2xl font-bold">THE BEST SERVICES</h3>
             <p className="text-[#737373] text-sm">
               Problems trying to resolve the conflict between
@@ -41,7 +45,7 @@ export default async function Home() {
         </Container>
         <Container
           maxWidth="lg"
-          className="my-20 flex items-center flex-col gap-20"
+          className="my-20 flex items-center flex-col gap-20 px-0"
         >
           <div className="text-center space-y-2">
             <h6 className="text-primary text-sm font-bold">Practice Advice</h6>
@@ -53,12 +57,12 @@ export default async function Home() {
         </Container>
         <Testimonial />
       </Container>
-      <div className="h-[640px] w-full relative flex items-center justify-center overflow-hidden">
+      <div className="h-[640px] w-full relative flex items-center justify-center overflow-hidden [&_div]:mx-5">
         <Image
           src={BannerImage}
           alt="cover"
           layout="cover"
-          className="absolute -z-10"
+          className="absolute -z-10 h-full object-cover"
         />
         <div className="flex flex-col items-center max-w-xl text-center gap-6">
           <h6 className="text-primary font-bold">
@@ -67,7 +71,7 @@ export default async function Home() {
           <h2 className="font-bold text-[2.5rem]">
             Problems trying to resolve the conflict between{" "}
           </h2>
-          <p className="text-secondary text-sm w-[448px]">
+          <p className="text-secondary text-sm md:w-[448px]">
             Problems trying to resolve the conflict between the two major realms
             of Classical physics:
           </p>

@@ -28,7 +28,7 @@ export default function PostCard({
   return (
     <Card>
       <CardHeader
-        className="h-[300px] w-[348px] p-0 relative"
+        className="h-[300px] min-w-[348px] p-0 relative overflow-hidden"
         classes={{ root: "block" }}
         title={
           <div className="relative">
@@ -43,7 +43,7 @@ export default function PostCard({
               alt={title}
               width={348}
               height={300}
-              className="absolute"
+              className="absolute w-full"
             />
           </div>
         }
@@ -64,7 +64,7 @@ export default function PostCard({
         </ul>
         <h4 className="text-xl">{title}</h4>
         <p className="text-secondary text-sm">{description}</p>
-        <div className="flex justify-between">
+        <div className="flex justify-between flex-wrap">
           <div className="flex items-center gap-1 text-secondary">
             <Image src={Clock} height={16} width={16} alt="date" />
             <small>{date}</small>

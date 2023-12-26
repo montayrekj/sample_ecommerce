@@ -18,13 +18,13 @@ export default function BestsellerProductItem({
   const discountedPrice = price - (price * discountPercentage) / 100;
   return (
     <div className="text-sm grid place-items-center text-center gap-y-2">
-      <div className="h-[140px] flex justify-center items-center">
+      <div className="h-[140px] flex justify-center items-center w-full">
         <Image
           src={thumbnail}
           alt={title}
           width={100}
           height={183}
-          className="h-full max-h-[128px] w-auto object-fill"
+          className="h-full max-h-[128px] w-full object-cover md:w-auto md:object-fill"
         />
       </div>
       <h5>{title}</h5>

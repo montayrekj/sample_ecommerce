@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function ServiceList() {
   return (
-    <div className="grid grid-cols-[repeat(3,320px)] my-20 text-center gap-x-4 place-items-center mx-auto w-fit">
+    <div className="grid grid-cols-1 gap-y-16 md:grid-cols-[repeat(3,minmax(0,320px))] my-20 text-center gap-x-4 place-items-center mx-auto w-fit">
       <div className="flex flex-col items-center gap-y-4 max-w-56">
         <Image
           src={EasyWins}

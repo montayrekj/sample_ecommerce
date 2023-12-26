@@ -20,7 +20,7 @@ const POSTS = [
 
 export default function PostList() {
   return (
-    <div className="grid grid-cols-3 gap-3">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-3">
       {POSTS.map((post) => (
         <PostCard key={post.title} {...post} />
       ))}
