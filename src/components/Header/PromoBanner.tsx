@@ -15,7 +15,7 @@ export default function PromoBanner() {
     <div className="bg-[#23856D] max-md:hidden text-white">
       <Container
         maxWidth="xl"
-        className="px-6 py-5 font-bold flex justify-between gap-4 text-sm items-center"
+        className="px-6 py-5 font-bold !flex justify-between gap-4 text-sm items-center"
       >
         <div className="flex flex-[3] flex-wrap items-center gap-x-6">
           <Link href="tel:2255550118">

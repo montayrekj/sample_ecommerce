@@ -18,6 +18,7 @@ const config: Config = {
         secondary: "#737373",
         price: "#23856D",
         lightgray: "#FAFAFA",
+        muted: "#BDBDBD",
       },
     },
   },

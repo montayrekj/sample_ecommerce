@@ -8,6 +8,8 @@ type RatingsProps = {
 };
 
 export default function Ratings({ rating, maxRating = 5 }: RatingsProps) {
+  const rates = Math.floor(rating);
+
   return (
     <div className="flex gap-1">
       {Array(maxRating)
@@ -15,7 +17,7 @@ export default function Ratings({ rating, maxRating = 5 }: RatingsProps) {
         .map((rate, i) => (
           <Image
             key={i}
-            src={i < rating ? StarFilled : Star}
+            src={i < rates ? StarFilled : Star}
             height={22}
             width={22}
             alt="star"

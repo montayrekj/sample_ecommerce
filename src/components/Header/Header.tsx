@@ -18,7 +18,11 @@ import {
 import { useState } from "react";
 import classNames from "classnames";
 
-export default function Header() {
+type HeaderProps = {
+  variant?: "home" | "product";
+};
+
+export default function Header({ variant = "home" }: HeaderProps) {
   const [isMenuOpen, setMenuOpen] = useState(true);
   const isDesktop = useMediaQuery(`(min-width:${BREAKPOINTS.tablet_lg}px)`);
   const links = isDesktop ? desktopHeaderLinks : mobileHeaderLinks;
@@ -27,8 +31,8 @@ export default function Header() {
     <>
       <PromoBanner />
       <Container
-        maxWidth="xl"
-        className="p-6 flex items-center flex-col md:flex-row"
+        maxWidth={variant === "home" ? "xl" : "lg"}
+        className="p-6 !flex items-center flex-col md:flex-row"
       >
         <div className="flex justify-between flex-1 lg:items-center max-lg:flex-col max-lg:w-full">
           <div className="flex justify-between items-center">
