@@ -7,7 +7,7 @@ import {
   Search,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
-import { Badge, Container, Menu, useMediaQuery } from "@mui/material";
+import { Badge, Container, Dialog, Menu, useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import PromoBanner from "./PromoBanner";
 import BREAKPOINTS from "@/lib/constants/breakpoints.constants";
@@ -19,12 +19,16 @@ import { useState } from "react";
 import classNames from "classnames";
 import { useAppSelector } from "@/lib/hooks/redux";
 import { Product } from "@/lib/types";
+import CartDialog from "./CartDialog";
+import WishlistDialog from "./WishlistDialog";
 
 type HeaderProps = {
   variant?: "home" | "product";
 };
 
 export default function Header({ variant = "home" }: HeaderProps) {
+  const [cartDialogOpen, setCartDialogOpen] = useState(false);
+  const [wishlistDialogOpen, setWishlistDialogOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(true);
   const isDesktop = useMediaQuery(`(min-width:${BREAKPOINTS.tablet_lg}px)`);
   const links = isDesktop ? desktopHeaderLinks : mobileHeaderLinks;
@@ -36,12 +40,7 @@ export default function Header({ variant = "home" }: HeaderProps) {
     )
   );
 
-  const wishlistLength = useAppSelector((state) =>
-    state.store.wishlist.reduce(
-      (acc: number, item: Product) => acc + item.quantity,
-      0
-    )
-  );
+  const wishlistLength = useAppSelector((state) => state.store.wishlist.length);
   return (
     <>
       <PromoBanner />
@@ -56,12 +55,23 @@ export default function Header({ variant = "home" }: HeaderProps) {
             </h3>
             {!isDesktop && (
               <ul className="flex gap-4">
-                <li>
-                  <Search />
-                </li>
-                <li>
-                  <ShoppingCartOutlined />
-                </li>
+                {!isMenuOpen && (
+                  <>
+                    <li>
+                      <Search />
+                    </li>
+                    <li onClick={() => setCartDialogOpen(true)}>
+                      {cartLength > 0 ? (
+                        <Badge badgeContent={cartLength} color="primary">
+                          <ShoppingCartOutlined />
+                        </Badge>
+                      ) : (
+                        <ShoppingCartOutlined />
+                      )}
+                    </li>
+                  </>
+                )}
+
                 <li onClick={() => setMenuOpen(!isMenuOpen)}>
                   <MenuTwoTone />
                 </li>
@@ -89,7 +99,7 @@ export default function Header({ variant = "home" }: HeaderProps) {
             <li>
               <Search />
             </li>
-            <li>
+            <li onClick={() => setCartDialogOpen(true)}>
               {cartLength > 0 ? (
                 <Badge badgeContent={cartLength} color="primary">
                   <ShoppingCartOutlined />
@@ -98,7 +108,38 @@ export default function Header({ variant = "home" }: HeaderProps) {
                 <ShoppingCartOutlined />
               )}
             </li>
+            <li onClick={() => setWishlistDialogOpen(true)}>
+              {wishlistLength > 0 ? (
+                <Badge badgeContent={wishlistLength} color="primary">
+                  <FavoriteBorder />
+                </Badge>
+              ) : (
+                <FavoriteBorder />
+              )}
+            </li>
+          </ul>
+        )}
+        {!isDesktop && isMenuOpen && (
+          <ul className="flex gap-4 text-primary flex-col mt-4 items-center text-2xl">
             <li>
+              <Link href="/" className="flex items-center gap-2">
+                <PersonOutline />
+                <span>Login / Register</span>
+              </Link>
+            </li>
+            <li>
+              <Search />
+            </li>
+            <li onClick={() => setCartDialogOpen(true)}>
+              {cartLength > 0 ? (
+                <Badge badgeContent={cartLength} color="primary">
+                  <ShoppingCartOutlined />
+                </Badge>
+              ) : (
+                <ShoppingCartOutlined />
+              )}
+            </li>
+            <li onClick={() => setWishlistDialogOpen(true)}>
               {wishlistLength > 0 ? (
                 <Badge badgeContent={wishlistLength} color="primary">
                   <FavoriteBorder />
@@ -110,6 +151,14 @@ export default function Header({ variant = "home" }: HeaderProps) {
           </ul>
         )}
       </Container>
+      <CartDialog
+        isOpen={cartDialogOpen}
+        onClose={() => setCartDialogOpen(false)}
+      />
+      <WishlistDialog
+        isOpen={wishlistDialogOpen}
+        onClose={() => setWishlistDialogOpen(false)}
+      />
     </>
   );
 }

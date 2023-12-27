@@ -26,40 +26,35 @@ export const storeState = createSlice({
         state.cart = [...state.cart, { ...payload, quantity: 1 }];
       }
     },
-    removeItemToCart: (state, { payload }) => {
-      const idx = state.cart.findIndex((item) => item.id === payload.id);
-      if (state.cart[idx].quantity > 0) {
+    addItemQuantity: (state, { payload }) => {
+      const idx = state.cart.findIndex((item) => item.id === payload);
+      const tempCart = [...state.cart];
+      tempCart[idx].quantity = tempCart[idx].quantity + 1;
+      state.cart = tempCart;
+    },
+    minusItemQuantity: (state, { payload }) => {
+      const idx = state.cart.findIndex((item) => item.id === payload);
+      if (state.cart[idx].quantity > 1) {
         const tempCart = [...state.cart];
-        if (tempCart[idx].quantity > 1) {
-          tempCart[idx].quantity = tempCart[idx].quantity - 1;
-          state.cart = tempCart;
-        } else {
-          state.cart = state.cart.filter((item) => item.id !== payload.id);
-        }
+        tempCart[idx].quantity = tempCart[idx].quantity - 1;
+        state.cart = tempCart;
+      } else {
+        state.cart = state.cart.filter((item) => item.id !== payload);
       }
     },
+    removeItemToCart: (state, { payload }) => {
+      state.cart = state.cart.filter((item) => item.id !== payload.id);
+    },
     addItemToWishlist: (state, { payload }) => {
-      const idx = state.wishlist.findIndex((item) => item.id === payload.id);
-      if (idx !== -1) {
-        const tempWishlist = [...state.wishlist];
-        tempWishlist[idx].quantity = tempWishlist[idx].quantity + 1;
-        state.wishlist = tempWishlist;
-      } else {
-        state.wishlist = [...state.wishlist, { ...payload, quantity: 1 }];
+      if (state.wishlist.findIndex((item) => item.id === payload.id) === -1) {
+        state.wishlist = [...state.wishlist, payload];
       }
     },
     removeItemToWishlist: (state, { payload }) => {
-      const idx = state.wishlist.findIndex((item) => item.id === payload.id);
-      if (state.wishlist[idx].quantity > 0) {
-        const tempWishlist = [...state.wishlist];
-        if (tempWishlist[idx].quantity > 1) {
-          tempWishlist[idx].quantity = tempWishlist[idx].quantity - 1;
-          state.wishlist = tempWishlist;
-        } else {
-          state.wishlist = state.wishlist.filter(
-            (item) => item.id !== payload.id
-          );
-        }
+      if (state.wishlist.findIndex((item) => item.id === payload.id) !== -1) {
+        state.wishlist = state.wishlist.filter(
+          (item) => item.id !== payload.id
+        );
       }
     },
   },
@@ -68,6 +63,8 @@ export const storeState = createSlice({
 export const {
   addItemToCart,
   addItemToWishlist,
+  addItemQuantity,
+  minusItemQuantity,
   removeItemToCart,
   removeItemToWishlist,
 } = storeState.actions;

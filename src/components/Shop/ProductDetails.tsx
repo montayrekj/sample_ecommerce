@@ -112,6 +112,7 @@ export default function ProductDetails({ product }: { product: Product }) {
         onClose={() => toggleSnackbar(false)}
         message={message}
         action={action}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       />
     </>
   );
