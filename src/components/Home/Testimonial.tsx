@@ -10,7 +10,7 @@ export default function Testimonial() {
   return (
     <Container
       maxWidth="lg"
-      className="my-20 flex justify-evenly max-lg:flex-col max-lg:gap-y-20 items-center gap-4"
+      className="my-20 !flex justify-evenly max-lg:flex-col max-lg:gap-y-20 items-center gap-4"
     >
       <div className="flex flex-col items-center justify-center text-center max-w-md gap-6">
         <h3 className="text-2xl font-bold mb-10">What they say about us</h3>

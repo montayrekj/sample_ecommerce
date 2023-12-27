@@ -36,7 +36,7 @@ export default function ProductList({ variant = "home" }: ProductListProps) {
 
   return (
     <Container maxWidth="lg" className="my-20 !flex items-center flex-col">
-      <div className="text-center space-y-2 max-w-[300px]">
+      <div className="text-center space-y-2 max-md:max-w-[300px]">
         <h4 className="text-[#737373] text-xl max-md:hidden">
           Featured Products
         </h4>

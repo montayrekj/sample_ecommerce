@@ -29,12 +29,12 @@ export default function PostCard({
     <Card>
       <CardHeader
         className="h-[300px] min-w-[348px] p-0 relative overflow-hidden"
-        classes={{ root: "block" }}
+        classes={{ root: "!block !p-0" }}
         title={
           <div className="relative">
             <Typography
               variant="h6"
-              className="absolute z-10 text-white text-sm px-4 py-1 bg-[#E74040] rounded top-3 left-3"
+              className="absolute z-10 text-white !text-sm px-4 py-1 bg-[#E74040] rounded top-3 left-3"
             >
               NEW
             </Typography>
@@ -48,7 +48,7 @@ export default function PostCard({
           </div>
         }
       />
-      <CardContent className="flex flex-col gap-4">
+      <CardContent className="!flex flex-col gap-4">
         <ul className="flex gap-4">
           {tags.map((tag, i) => (
             <li key={tag}>
