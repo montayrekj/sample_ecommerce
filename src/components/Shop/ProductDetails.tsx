@@ -13,12 +13,16 @@ import {
 import { useState } from "react";
 import { addItemToCart, addItemToWishlist } from "@/lib/features/store";
 import { useAppDispatch } from "@/lib/hooks/redux";
+import classNames from "classnames";
 
 export default function ProductDetails({ product }: { product: Product }) {
   const dispatch = useAppDispatch();
   const [snackbarOpen, toggleSnackbar] = useState(false);
   const [message, setMessage] = useState("");
   const colors = ["#23A6F0", "#2DC071", "#E77C40", "#252B42"];
+
+  const discountPrice =
+    product.price - product.price * (product.discountPercentage / 100);
 
   const action = (
     <>
@@ -59,7 +63,19 @@ export default function ProductDetails({ product }: { product: Product }) {
             <h6 className="flex items-center gap-2 text-secondary">
               <Ratings rating={product.rating} /> 10 reviews
             </h6>
-            <h3 className="text-2xl">${product.price.toFixed(2)}</h3>
+            <div className="flex gap-2 items-center">
+              <h3
+                className={classNames("text-2xl", {
+                  "text-secondary line-through text-xl":
+                    product.discountPercentage > 0,
+                })}
+              >
+                ${product.price.toFixed(2)}
+              </h3>
+              {product.discountPercentage > 0 && (
+                <h3 className="text-2xl">${discountPrice.toFixed(2)}</h3>
+              )}
+            </div>
             <h6 className="text-secondary text-sm">
               Availability:{" "}
               {product.stock > 0 ? (
