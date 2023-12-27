@@ -13,6 +13,7 @@ import {
   DialogTitle,
   IconButton,
 } from "@mui/material";
+import classNames from "classnames";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
@@ -61,79 +62,80 @@ export default function CartDialog({ isOpen, onClose }: CartDialogProps) {
       <DialogContent>
         <>
           <div className="flex flex-col gap-y-10 md:gap-y-4 pt-6">
-            {cart &&
-              cart.length > 0 &&
-              cart.map((item: Product) => {
-                const discountedPrice =
-                  item.price - item.price * (item.discountPercentage / 100);
-                return (
-                  <div key={item.id} className="flex gap-4 max-md:flex-col">
-                    <div className="flex gap-4">
-                      <div className="my-auto">
-                        <input
-                          type="checkbox"
-                          checked={
-                            checkoutIds.findIndex((id) => id === item.id) !== -1
-                          }
-                          className="w-5 h-5"
-                          onClick={() => {
-                            toggleCheckbox(item.id);
-                          }}
-                        />
+            {cart && cart.length > 0
+              ? cart.map((item: Product) => {
+                  const discountedPrice =
+                    item.price - item.price * (item.discountPercentage / 100);
+                  return (
+                    <div key={item.id} className="flex gap-4 max-md:flex-col">
+                      <div className="flex gap-4">
+                        <div className="my-auto">
+                          <input
+                            type="checkbox"
+                            checked={
+                              checkoutIds.findIndex((id) => id === item.id) !==
+                              -1
+                            }
+                            className="w-5 h-5"
+                            onClick={() => {
+                              toggleCheckbox(item.id);
+                            }}
+                          />
+                        </div>
+                        <div className="w-full md:w-[200px] h-[150px] border">
+                          <Image
+                            src={item.thumbnail}
+                            alt={item.title}
+                            className="w-full h-full object-cover"
+                            width={200}
+                            height={200}
+                          />
+                        </div>
                       </div>
-                      <div className="w-full md:w-[200px] h-[150px] border">
-                        <Image
-                          src={item.thumbnail}
-                          alt={item.title}
-                          className="w-full h-full object-cover"
-                          width={200}
-                          height={200}
+                      <div className="space-y-1">
+                        <h5 className="text-2xl">{item.title}</h5>
+                        <h3 className="text-price font-bold space-x-2">
+                          {item.discountPercentage > 0 ? (
+                            <span>${discountedPrice.toFixed(2)}</span>
+                          ) : (
+                            <span>${item.price.toFixed(2)}</span>
+                          )}
+                        </h3>
+                        <div className="text-base flex items-center">
+                          <IconButton
+                            size="small"
+                            aria-label="close"
+                            color="inherit"
+                            onClick={() => dispatch(minusItemQuantity(item.id))}
+                          >
+                            <Remove fontSize="small" />
+                          </IconButton>
+                          <span className="text-price font-bold">
+                            {item.quantity}
+                          </span>
+                          <IconButton
+                            size="small"
+                            aria-label="close"
+                            color="inherit"
+                            onClick={() => dispatch(addItemQuantity(item.id))}
+                          >
+                            <Add fontSize="small" />
+                          </IconButton>
+                        </div>
+                        <Delete
+                          className="text-red-500 cursor-pointer"
+                          onClick={() => dispatch(removeItemToCart(item))}
                         />
                       </div>
                     </div>
-                    <div className="space-y-1">
-                      <h5 className="text-2xl">{item.title}</h5>
-                      <h3 className="text-price font-bold space-x-2">
-                        {item.discountPercentage > 0 ? (
-                          <span>${discountedPrice.toFixed(2)}</span>
-                        ) : (
-                          <span>${item.price.toFixed(2)}</span>
-                        )}
-                      </h3>
-                      <div className="text-base flex items-center">
-                        <IconButton
-                          size="small"
-                          aria-label="close"
-                          color="inherit"
-                          onClick={() => dispatch(minusItemQuantity(item.id))}
-                        >
-                          <Remove fontSize="small" />
-                        </IconButton>
-                        <span className="text-price font-bold">
-                          {item.quantity}
-                        </span>
-                        <IconButton
-                          size="small"
-                          aria-label="close"
-                          color="inherit"
-                          onClick={() => dispatch(addItemQuantity(item.id))}
-                        >
-                          <Add fontSize="small" />
-                        </IconButton>
-                      </div>
-                      <Delete
-                        className="text-red-500 cursor-pointer"
-                        onClick={() => dispatch(removeItemToCart(item))}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              : "Your cart is empty!"}
           </div>
           <div className="w-full flex justify-between mt-10 border-t border-secondary pt-4 items-center gap-2">
             <input
               type="checkbox"
-              checked={checkoutIds.length === cart.length}
+              checked={checkoutIds.length === cart.length && cart.length !== 0}
               className="w-5 h-5"
               onClick={() => {
                 if (checkoutIds.length === cart.length) {
@@ -142,6 +144,7 @@ export default function CartDialog({ isOpen, onClose }: CartDialogProps) {
                   setCheckoutIds(cart.map((item) => item.id));
                 }
               }}
+              disabled={cart.length === 0}
             />
             <div className="flex items-center gap-4">
               <h6>
@@ -151,9 +154,12 @@ export default function CartDialog({ isOpen, onClose }: CartDialogProps) {
                 </span>
               </h6>
               <Button
-                disabled={checkoutIds.length === 0}
+                disabled={checkoutIds.length === 0 || cart.length === 0}
                 variant="contained"
-                className="!bg-price !text-white ml-4"
+                className={classNames("!bg-price !text-white ml-4", {
+                  "!cursor-not-allowed !pointer-events-auto":
+                    checkoutIds.length === 0 || cart.length === 0,
+                })}
                 onClick={() =>
                   alert(`You will checkout ${checkoutIds.length} items!`)
                 }

@@ -41,40 +41,40 @@ export default function WishlistDialog({
       </DialogTitle>
       <DialogContent>
         <>
-          <div className="flex flex-col gap-y-10 md:gap-y-4 pt-6">
-            {wishlist &&
-              wishlist.length > 0 &&
-              wishlist.map((item: Product) => {
-                return (
-                  <div key={item.id} className="flex gap-4 max-md:flex-col">
-                    <div className="w-full md:w-[200px] h-[150px] border">
-                      <Image
-                        src={item.thumbnail}
-                        alt={item.title}
-                        className="w-full h-full object-cover"
-                        width={200}
-                        height={200}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <h5 className="text-2xl">{item.title}</h5>
-                      <div className="text-base flex items-center">
-                        <Button
-                          variant="contained"
-                          className="!bg-price"
-                          onClick={() => dispatch(addItemToCart(item))}
-                        >
-                          <AddShoppingCart fontSize="small" />+
-                        </Button>
+          <div className="flex flex-col gap-y-10 md:gap-y-4 py-6">
+            {wishlist && wishlist.length > 0
+              ? wishlist.map((item: Product) => {
+                  return (
+                    <div key={item.id} className="flex gap-4 max-md:flex-col">
+                      <div className="w-full md:w-[200px] h-[150px] border">
+                        <Image
+                          src={item.thumbnail}
+                          alt={item.title}
+                          className="w-full h-full object-cover"
+                          width={200}
+                          height={200}
+                        />
                       </div>
-                      <Delete
-                        className="text-red-500 cursor-pointer"
-                        onClick={() => dispatch(removeItemToWishlist(item))}
-                      />
+                      <div className="space-y-2">
+                        <h5 className="text-2xl">{item.title}</h5>
+                        <div className="text-base flex items-center">
+                          <Button
+                            variant="contained"
+                            className="!bg-price"
+                            onClick={() => dispatch(addItemToCart(item))}
+                          >
+                            <AddShoppingCart fontSize="small" />+
+                          </Button>
+                        </div>
+                        <Delete
+                          className="text-red-500 cursor-pointer"
+                          onClick={() => dispatch(removeItemToWishlist(item))}
+                        />
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              : "Your wishlist is empty!"}
           </div>
         </>
       </DialogContent>
