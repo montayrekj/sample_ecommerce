@@ -12,25 +12,7 @@ export default async function Home() {
     <>
       <Container maxWidth="xl" className="w-auto pb-20">
         <FurnitureGallery />
-        <Container maxWidth="lg" className="my-20 flex items-center flex-col">
-          <div className="text-center space-y-2 max-w-[300px]">
-            <h4 className="text-[#737373] text-xl max-md:hidden">
-              Featured Products
-            </h4>
-            <h3 className="text-2xl font-bold">BESTSELLER PRODUCTS</h3>
-            <p className="text-[#737373] text-sm">
-              Problems trying to resolve the conflict between
-            </p>
-          </div>
-          <ProductList />
-          <Button
-            variant="outlined"
-            className="w-60 py-3 text-sm text-primary border-primary"
-            // onClick={() => alert("Load more products")}
-          >
-            LOAD MORE PRODUCTS
-          </Button>
-        </Container>
+        <ProductList />
         <Container maxWidth="lg" className="my-20 flex items-center flex-col">
           <div className="text-center space-y-2">
             <h4 className="text-[#737373] text-xl max-md:hidden">

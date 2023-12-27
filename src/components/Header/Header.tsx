@@ -7,7 +7,7 @@ import {
   Search,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
-import { Container, Menu, useMediaQuery } from "@mui/material";
+import { Badge, Container, Menu, useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import PromoBanner from "./PromoBanner";
 import BREAKPOINTS from "@/lib/constants/breakpoints.constants";
@@ -17,6 +17,8 @@ import {
 } from "@/lib/constants/header.constants";
 import { useState } from "react";
 import classNames from "classnames";
+import { useAppSelector } from "@/lib/hooks/redux";
+import { Product } from "@/lib/types";
 
 type HeaderProps = {
   variant?: "home" | "product";
@@ -27,6 +29,19 @@ export default function Header({ variant = "home" }: HeaderProps) {
   const isDesktop = useMediaQuery(`(min-width:${BREAKPOINTS.tablet_lg}px)`);
   const links = isDesktop ? desktopHeaderLinks : mobileHeaderLinks;
 
+  const cartLength = useAppSelector((state) =>
+    state.store.cart.reduce(
+      (acc: number, item: Product) => acc + item.quantity,
+      0
+    )
+  );
+
+  const wishlistLength = useAppSelector((state) =>
+    state.store.wishlist.reduce(
+      (acc: number, item: Product) => acc + item.quantity,
+      0
+    )
+  );
   return (
     <>
       <PromoBanner />
@@ -75,10 +90,22 @@ export default function Header({ variant = "home" }: HeaderProps) {
               <Search />
             </li>
             <li>
-              <ShoppingCartOutlined />
+              {cartLength > 0 ? (
+                <Badge badgeContent={cartLength} color="primary">
+                  <ShoppingCartOutlined />
+                </Badge>
+              ) : (
+                <ShoppingCartOutlined />
+              )}
             </li>
             <li>
-              <FavoriteBorder />
+              {wishlistLength > 0 ? (
+                <Badge badgeContent={wishlistLength} color="primary">
+                  <FavoriteBorder />
+                </Badge>
+              ) : (
+                <FavoriteBorder />
+              )}
             </li>
           </ul>
         )}

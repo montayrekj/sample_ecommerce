@@ -19,14 +19,13 @@ export default async function ProductPage({
     `https://dummyjson.com/products/${params.productId}`
   ).then((res) => res.json());
 
-  console.log(params, product);
-
   return (
-    <div className="bg-[#FAFAFA] py-12">
+    <div className="bg-[#FAFAFA] py-12 max-lg:mt-12">
       <Container maxWidth="lg" className="mb-8">
         <Breadcrumbs
           separator={<ArrowForwardIos className="text-muted" />}
           aria-label="breadcrumb"
+          className="[&_.MuiBreadcrumbs-ol]:max-md:justify-center"
         >
           <a href="/" className="font-bold">
             Home

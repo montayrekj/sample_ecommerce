@@ -7,6 +7,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import StoreProvider from "./StoreProvider";
 
 const montserrat = Montserrat({
   style: ["normal", "italic"],
@@ -28,9 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <Header />
-        {children}
-        <Footer />
+        <StoreProvider>
+          <Header />
+          {children}
+          <Footer />
+        </StoreProvider>
       </body>
     </html>
   );

@@ -47,7 +47,7 @@ export default function Footer() {
           <div className="flex flex-col gap-4">
             <h5 className="text-base mb-2">Get In Touch</h5>
             <div>
-              <FormGroup row>
+              <FormGroup row className="flex-nowrap">
                 <TextField
                   variant="outlined"
                   placeholder="Your Email"
